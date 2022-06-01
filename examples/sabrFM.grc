@@ -1,0 +1,278 @@
+options:
+  parameters:
+    author: sfriedman
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: TapHere!
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: top_block
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: SABR GNURadio FM Demo
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [128, 36.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: center_frequency
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Frequency
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '70000000'
+    step: '100000'
+    stop: '6000000000'
+    value: '106700000'
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [480, 52.0]
+    rotation: 0
+    state: true
+- name: gain_mode
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Gain Mode
+    label0: Manual Gain
+    label1: Slow AGC
+    label2: Fast AGC
+    label3: Hybrid AGC
+    label4: ''
+    labels: '[]'
+    num_opts: '3'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QHBoxLayout
+    type: int
+    value: '0'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 52.0]
+    rotation: 0
+    state: true
+- name: radio_gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Gain
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '-10'
+    step: '1'
+    stop: '50'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 52.0]
+    rotation: 0
+    state: true
+- name: sample_rate
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Sample Rate
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["640000", "960000", "1000000", "1920000", "2000000", "3840000", "4000000",
+      "6000000", "7680000", "8000000", "10000000", "14000000", "15360000", "16000000",
+      "20000000", "24000000", "28000000", "30720000", "32000000", "36000000", "40000000",
+      "44000000", "48000000", "52000000", "56000000", "60000000", "61440000"]'
+    num_opts: '0'
+    option0: '640000'
+    option1: '1920000'
+    option2: '2000000'
+    option3: '10000000'
+    option4: '40000000'
+    options: '[640000, 960000, 1000000, 1920000, 2000000, 3840000, 4000000, 6000000,
+      7680000, 8000000, 10000000, 14000000, 15360000, 16000000, 20000000, 24000000,
+      28000000, 30720000, 32000000, 36000000, 40000000, 44000000, 48000000, 52000000,
+      56000000, 60000000, 61440000]'
+    orient: Qt.QHBoxLayout
+    type: real
+    value: '7680000'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [784, 52.0]
+    rotation: 0
+    state: true
+- name: analog_wfm_rcv_0
+  id: analog_wfm_rcv
+  parameters:
+    affinity: ''
+    alias: ''
+    audio_decimation: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    quad_rate: '192000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 532.0]
+    rotation: 0
+    state: true
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 540.0]
+    rotation: 0
+    state: true
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: '100000'
+    decim: (int)(sample_rate/192000)
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: sample_rate
+    type: fir_filter_ccf
+    width: '10000'
+    win: firdes.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 492.0]
+    rotation: 0
+    state: true
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: sample_rate
+    comment: ''
+    fc: center_frequency
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'False'
+    plotfreq: 'True'
+    plottime: 'False'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'True'
+    type: complex
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 292.0]
+    rotation: 0
+    state: true
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '4'
+    fbw: '.1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [736, 516.0]
+    rotation: 0
+    state: true
+- name: sabrSDR_sabr_source_1
+  id: sabrSDR_sabr_source
+  parameters:
+    affinity: ''
+    alias: ''
+    center_frequency: center_frequency
+    comment: ''
+    gain: radio_gain
+    gain_mode: gain_mode
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    sample_rate: sample_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [88, 300]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_wfm_rcv_0, '0', rational_resampler_xxx_0, '0']
+- [low_pass_filter_0, '0', analog_wfm_rcv_0, '0']
+- [rational_resampler_xxx_0, '0', audio_sink_0, '0']
+- [sabrSDR_sabr_source_1, '0', low_pass_filter_0, '0']
+- [sabrSDR_sabr_source_1, '0', qtgui_sink_x_0, '0']
+
+metadata:
+  file_format: 1

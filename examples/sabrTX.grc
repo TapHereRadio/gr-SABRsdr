@@ -1,0 +1,286 @@
+options:
+  parameters:
+    author: THR
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: THR
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: TransmitTest
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: SABR Transmit Test
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 12.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: center_frequency
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Frequency
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '70000000'
+    step: '100000'
+    stop: '6000000000'
+    value: '2200000000'
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12.0]
+    rotation: 0
+    state: true
+- name: default_samp
+  id: variable
+  parameters:
+    comment: ''
+    value: '1920000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 12.0]
+    rotation: 0
+    state: true
+- name: quad_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '192000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 12.0]
+    rotation: 0
+    state: true
+- name: sample_rate
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Sample Rate
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["640000", "960000", "1000000", "1920000", "2000000", "3840000", "4000000",
+      "6000000", "7680000", "8000000", "10000000", "14000000", "15360000", "16000000",
+      "20000000", "24000000", "28000000", "30720000", "32000000", "36000000", "40000000",
+      "44000000", "48000000", "52000000", "56000000", "60000000", "61440000"]'
+    num_opts: '0'
+    option0: '640000'
+    option1: '1920000'
+    option2: '2000000'
+    option3: '10000000'
+    option4: '40000000'
+    options: '[640000, 960000, 1000000, 1920000, 2000000, 3840000, 4000000, 6000000,
+      7680000, 8000000, 10000000, 14000000, 15360000, 16000000, 20000000, 24000000,
+      28000000, 30720000, 32000000, 36000000, 40000000, 44000000, 48000000, 52000000,
+      56000000, 60000000, 61440000]'
+    orient: Qt.QHBoxLayout
+    type: real
+    value: default_samp
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [480, 12.0]
+    rotation: 0
+    state: true
+- name: tx_attenuation
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Attenuation
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.25'
+    stop: '89.75'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 12.0]
+    rotation: 0
+    state: true
+- name: analog_wfm_tx_0
+  id: analog_wfm_tx
+  parameters:
+    affinity: ''
+    alias: ''
+    audio_rate: '48000'
+    comment: ''
+    fh: '-1.0'
+    max_dev: 75e3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    quad_rate: quad_rate
+    tau: 75e-6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 404.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_1
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: 1024 * 1.5
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 436.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_2
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 436.0]
+    rotation: 0
+    state: true
+- name: blocks_wavfile_source_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: /home/radio/Documents/CantinaBand48k.wav
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [96, 428.0]
+    rotation: 0
+    state: true
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: sample_rate
+    comment: ''
+    fc: center_frequency
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1104, 284.0]
+    rotation: 0
+    state: true
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '1'
+    fbw: '0.01'
+    interp: (int)(sample_rate/quad_rate)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 412.0]
+    rotation: 0
+    state: true
+- name: sabrSDR_sabr_sink_0
+  id: sabrSDR_sabr_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    attenuation: '0'
+    center_frequency: center_frequency
+    comment: ''
+    sample_rate: sample_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1112, 420.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_wfm_tx_0, '0', rational_resampler_xxx_0, '0']
+- [blocks_multiply_const_vxx_1, '0', qtgui_sink_x_0, '0']
+- [blocks_multiply_const_vxx_1, '0', sabrSDR_sabr_sink_0, '0']
+- [blocks_multiply_const_vxx_2, '0', analog_wfm_tx_0, '0']
+- [blocks_wavfile_source_0, '0', blocks_multiply_const_vxx_2, '0']
+- [rational_resampler_xxx_0, '0', blocks_multiply_const_vxx_1, '0']
+
+metadata:
+  file_format: 1

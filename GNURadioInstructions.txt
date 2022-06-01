@@ -1,0 +1,65 @@
+If GNURadio is installed with pybombs:
+run this in terminal prior to installing any OOT modules or opening gnuradio-companion
+source ~/prefix-3.8/setup_env.sh
+
+###########################################
+INSTALLATION INSTRUCTIONS
+-------------------------------------------
+To build module...
+cd to module directory
+
+mkdir build
+cd build
+cmake ../
+sudo make install
+sudo ldconfig
+-------------------------------------------
+To remove...
+
+sudo make uninstall
+can also try...
+make clean
+
+
+############################################
+COMMON ERRORS/ISSUES
+--------------------------------------------
+ModuleNotFound Error:
+
+export PYTHONPATH=/usr/local/lib/python3/dist-packages:$PYTHONPATH
+gnuradio-companion
+
+--------------------------------------------
+May need to also install libusb and liborc-0.4 using:
+
+sudo apt-get install libusb-1.0-0-dev
+sudo apt-get install liborc-0.4-dev
+
+--------------------------------------------
+Occasional Issues (not sure if it is armv8 issue or something else):
+
+If you get a symbol not found error (usually FT_ReadPipe or something from the FTDI driver)
+then it may be wise to check if the built so lists libftd3xx.so as a dependent library. Path of
+libgnuradio-sabrSDR.so can be seen in the error message.
+
+use:
+ldd libgnuradio-sabrSDR.so.1.0.0
+
+and look in the list for libftd3xx.so as a dependent library if it isn't there then the current
+workaround is to run command:
+sudo patchelf --add-needed libftd3xx.so libgnuradio-sabrSDR.so
+--------------------------------------------
+If you get the following error or something similar when building (with gnuradio::runtime rather than boost):
+
+CMake Error in lib/CMakeLists.txt:
+  Imported target "Boost::chrono" includes non-existent path
+
+    "/include"
+    
+it is best to delete the build directory and then use one of the following commands (I've had the most luck with the first one)
+
+
+PATH=/usr/bin:$PATH cmake ..
+
+cmake -DCMAKE_FIND_ROOT_PATH=/usr ..
+-------------------------------------------
