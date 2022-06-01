@@ -16,6 +16,7 @@ sudo apt-get install liborc-0.4-dev
 </pre>
 
 ## Installation Instructions
+* USB Drivers
 First please make sure that the FTDI D3XXX drivers are installed. FTDI provides links for the x86 and x64 drivers, if ARMv7 or ARMv8 drivers are needed please contact us. There is a readme provided by FTDI to install but basically you just run the following commands...
 <pre>
 sudo rm /usr/lib/libftd3xx.so
@@ -24,9 +25,10 @@ sudo cp libftd3xx.so.0.5.21 /usr/lib/
 sudo cp 51-ftd3xx.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules
 </pre>
-To build module...
-cd to module directory then run the following commands
+* Building from source
 <pre>
+git clone https://github.com/TapHereRadio/gr-sabrSDR.git
+cd gr-sabrSDR
 mkdir build
 cd build
 cmake ../
