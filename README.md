@@ -41,4 +41,5 @@ sudo make uninstall
 make clean
 </pre>
 ## Known Issues
-The GNURadio blocks currently only support TDD operation. This means that you can not currently use the source block (RX) and sink block (TX) at the same time.
+* The GNURadio blocks currently only support TDD operation. This means that you can not currently use the source block (RX) and sink block (TX) at the same time.
+* TX functionality requires SABR firmware version 2.4 or above
