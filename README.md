@@ -7,7 +7,13 @@ Includes GNU Radio blocks for TapHere Radio's SABR SDR
 * BOOST
 * SWIG
 * libusb
+<pre>
+sudo apt-get install libusb-1.0-0-dev
+</pre>
 * liborc-0.4
+<pre>
+sudo apt-get install liborc-0.4-dev
+</pre>
 
 ## Installation Instructions
 First please make sure that the FTDI D3XXX drivers are installed. FTDI provides links for the x86 and x64 drivers, if ARMv7 or ARMv8 drivers are needed please contact us. There is a readme provided by FTDI to install but basically you just run the following commands...
