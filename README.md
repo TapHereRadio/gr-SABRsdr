@@ -1,6 +1,8 @@
 # gr-sabrSDR
 Includes GNU Radio blocks for TapHere Radio's SABR SDR
 
+Currently only GNU Radio version 3.8 is supported
+
 ## Dependencies
 * GNU Radio (Version 3.8)
 * FTDI D3XXX Drivers (https://ftdichip.com/drivers/d3xx-drivers/)
