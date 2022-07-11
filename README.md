@@ -2,7 +2,7 @@
 Includes GNU Radio blocks for TapHere Radio's SABR SDR
 
 ## Dependencies
-* GNU Radio(3.8)
+* GNU Radio (Version 3.8)
 * FTDI D3XXX Drivers (https://ftdichip.com/drivers/d3xx-drivers/)
 * BOOST
 * SWIG
@@ -43,3 +43,4 @@ make clean
 ## Known Issues
 * The GNURadio blocks currently only support TDD operation. This means that you can not currently use the source block (RX) and sink block (TX) at the same time.
 * TX functionality requires SABR firmware version 2.4 or above
+* Only GNURadio Version 3.8 is supported. Support for 3.10 is planned but not currently in development.
